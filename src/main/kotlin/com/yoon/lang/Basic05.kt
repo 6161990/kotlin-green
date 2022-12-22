@@ -1,5 +1,6 @@
 package com.yoon.lang
 
+/** for */
 fun main() {
     // 범위 연산자 ..를 사용해 for loop 돌리기
     for (i in 0 .. 3) { // 3 포함
