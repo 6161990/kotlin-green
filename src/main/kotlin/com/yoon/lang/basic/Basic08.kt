@@ -1,4 +1,4 @@
-package com.yoon.lang
+package com.yoon.lang.basic
 
 
 /** exception : 자바와 다르게 checkedException 을 강제 하지 않는다.*/

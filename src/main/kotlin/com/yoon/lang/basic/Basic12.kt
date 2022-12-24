@@ -1,4 +1,4 @@
-package com.yoon.lang
+package com.yoon.lang.basic
 
 /** enum class
  * 자바와는 달리 열거형 클래스 만들 때, 'class' 키워드가 붙는다.

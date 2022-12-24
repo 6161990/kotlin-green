@@ -1,6 +1,4 @@
-package com.yoon.lang
-
-import org.intellij.lang.annotations.Language
+package com.yoon.lang.basic
 
 /** 상속 , 추상클래스
  * 코틀린 class 는 기본적으로 final 이다.

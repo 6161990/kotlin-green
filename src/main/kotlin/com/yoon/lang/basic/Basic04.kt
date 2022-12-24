@@ -1,4 +1,4 @@
-package com.yoon.lang
+package com.yoon.lang.basic
 
 /** when */
 fun main() {
@@ -37,7 +37,7 @@ fun main() {
 fun getNumber() :Int{
     return 3
 }
-fun getColor(): Color{
+fun getColor(): Color {
     return Color.RED
 }
 

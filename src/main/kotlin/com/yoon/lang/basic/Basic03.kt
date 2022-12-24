@@ -1,4 +1,4 @@
-package com.yoon.lang
+package com.yoon.lang.basic
 
 /** 코틀린에서 if else 는 표현'식' 이다.*/
 fun main() {

@@ -1,4 +1,4 @@
-package com.yoon.lang
+package com.yoon.lang.basic
 
 /** for */
 fun main() {

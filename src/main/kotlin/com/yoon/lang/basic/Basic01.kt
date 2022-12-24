@@ -1,4 +1,4 @@
-package com.yoon.lang
+package com.yoon.lang.basic
 
 var x = 5
 
@@ -29,6 +29,6 @@ fun main(){
      * */
 
     // 변수 탑레벨 설정가능 - 클래스 없이 변수와 함수를 만들 수 있다.
-    x+= 1
+    x += 1
     println(x)
 }

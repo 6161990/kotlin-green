@@ -1,6 +1,4 @@
-package com.yoon.lang
-
-import java.lang.NullPointerException
+package com.yoon.lang.basic
 
 /** null */
 
