@@ -85,4 +85,21 @@ fun main() {
     immutableCurrencyList.forEach {
         println(it)
     }
+
+    println("============================")
+
+    /** for loop -> map  */
+    val lowCaseList = listOf("one", "two", "three")
+    val upperCaseList = mutableListOf<String>()
+
+    for (lowCase in lowCaseList){
+        upperCaseList.add(lowCase.uppercase())
+    }
+
+    println("before : $upperCaseList")
+
+    val upperCase = lowCaseList.map { it.uppercase() }
+    println("after : $upperCase")
+
+
 }
