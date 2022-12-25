@@ -1,12 +1,15 @@
 package com.yoon.lang.advanced
 
+import java.util.ArrayList
+import java.util.LinkedList
+
 /** collection */
 fun main() {
 
     /** list */
     // immutable : 최초로 생성하면 값을 수정하거나 삭제할 수 없음
     // immutable 은 Collection 을 구현함
-    val immutable = listOf("달러", "유로", "원")
+    val immutableCurrencyList = listOf("달러", "유로", "원")
 
 
     // mutable : 변경 가능함
@@ -42,4 +45,44 @@ fun main() {
     mutableMapOf.put("one", 1) // 가능하지만 추천하지 않고
     mutableMapOf["two"] = 2    // 이렇게 iterable 로 넣는 것은 코틀린에서 추천.
     mutableMapOf["three"] = 3
+
+
+    /** collection builder */
+    val buildList = buildList {  // buildList 는 (내부) mutable 한 값을 받아서 (외부) immutable 하게 return 한다.
+        add(1)
+        add(2)
+        add(3)
+    }
+
+    /** 기타 list 의 구현체들을 생성자를 이용한다. */
+    // LinkedList
+    val linkedList = LinkedList<Int>().apply {
+        addFirst(3)
+        add(2)
+        addLast(1)
+    }
+
+    val arrayList = ArrayList<Int>().apply {
+        add(1)
+        add(2)
+        add(3)
+    }
+
+    /** iterator */
+    val iterator = immutableCurrencyList.iterator()
+    while (iterator.hasNext()){
+        println(iterator.next())
+    }
+    
+    println("============================")
+    
+    for (currency in immutableCurrencyList){
+        println(currency)
+    }
+
+    println("============================")
+
+    immutableCurrencyList.forEach {
+        println(it)
+    }
 }
