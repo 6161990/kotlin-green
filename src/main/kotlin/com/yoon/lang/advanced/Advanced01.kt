@@ -92,14 +92,45 @@ fun main() {
     val lowCaseList = listOf("one", "two", "three")
     val upperCaseList = mutableListOf<String>()
 
-    for (lowCase in lowCaseList){
+    for (lowCase in lowCaseList){  // for 문 사용
         upperCaseList.add(lowCase.uppercase())
     }
 
     println("before : $upperCaseList")
 
-    val upperCase = lowCaseList.map { it.uppercase() }
+    val upperCase = lowCaseList.map { it.uppercase() }  // map 사용
     println("after : $upperCase")
+
+    /** for loop -> filter */
+    val filteredList = mutableListOf<String>()
+    for (it in upperCase){  // for 문 사용
+        if(it == "TWO"){
+            filteredList.add(it)
+        }
+    }
+
+    println(filteredList)
+
+    val filteredList2 = upperCase.filter { it == "TWO" }
+    println(filteredList2)
+
+    println("============================")
+
+    /** 자바는 최종연산(terminal operator) 이 있어야 하는데,
+     *  코틀린에서는 최종연산 필요없이 중간연산(인라인)으로도 값을 추출할 수 있다.
+     *   코틀린에서는 filter() 등의 인라인 함수가 list 를 반환한다.
+     *  최종 연산을 사용하려면 asSequence() 를 이용하면 된다. */
+    val toList = upperCase
+        .asSequence()
+        .filter { it == "TWO" }
+        .filter { it == "THREE" }
+        .filter { it == "ONE" }
+        .toList()
+
+    // 인라인 함수가 많을 때 or 데이터가 5만건 정도로 많을 때, terminal operator 를 사용하면 메모리 효율이 증가한다.
+    //
+
+    println(toList)
 
 
 }
