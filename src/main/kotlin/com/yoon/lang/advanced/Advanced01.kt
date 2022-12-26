@@ -128,9 +128,7 @@ fun main() {
         .toList()
 
     // 인라인 함수가 많을 때 or 데이터가 5만건 정도로 많을 때, terminal operator 를 사용하면 메모리 효율이 증가한다.
-    //
 
     println(toList)
-
 
 }
