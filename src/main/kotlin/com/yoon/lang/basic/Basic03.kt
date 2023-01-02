@@ -8,17 +8,17 @@ fun main() {
 
     if(job == "developer"){
         println("개발자임")
-    }else {
+    } else {
         println("개발자 아님")
     }
 
     // 코틀린에서 if else 는 표현'식' 이다.
     // 이와는 다르게 자바에서 if else 는 구문이다.
     val result = if(job == "developer"){
-        "개발자임"
-    }else {
-        "개발자 아님"
-    }
+                    "개발자임"
+                } else {
+                    "개발자 아님"
+                }
 
     println("result=${result}")
 

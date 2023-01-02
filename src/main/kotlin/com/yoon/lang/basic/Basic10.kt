@@ -7,7 +7,7 @@ package com.yoon.lang.basic
 
 open class Dog {
     open var age : Int = 0
-
+ㅎ
     open fun bark(){
         println("멍멍")
     }

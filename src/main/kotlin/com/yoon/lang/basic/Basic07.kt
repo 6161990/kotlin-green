@@ -40,7 +40,7 @@ fun main() {
     // 1. throws NullPointerException
     // 2. 단언 연산자 !! 를 사용할 때  = npe 가 절대 아닐거야~ , 사실상 npe 가 발생하면 개발자가 컨트롤 하겠다는 의미
     /**
-    *   val npe : String? = null
+        val npe : String? = null
         val result = npe!!.length
         println(result)
      */
@@ -52,4 +52,4 @@ fun main() {
 
 fun getNullStr() : String? = null
 
-fun getLengthIsNotnull(str : String?) = str?.length ?: 0 // str 가 0일 때 . 뒤에 연산자 length 를 타지 않음.
+fun getLengthIsNotnull(str : String?) = str?.length ?: 0 // str 가 null 일 때 . 뒤에 연산자 length 를 타지 않음.

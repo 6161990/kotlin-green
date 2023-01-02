@@ -16,7 +16,7 @@ class Coffee2 (val name: String) {}
 class TrailingComma (
     val name: String,
     val price: Int, // 후행 쉼표
-    )
+)
 
 
 // var 로 생성자 만들면, 기본값 지정이 가능하다
@@ -28,17 +28,14 @@ class VarVar(
     var brand: String = "스타벅스",
 ){
     /**
-    getter 커스텀은 자바처럼 오버라이딩 불가능하다
-    fun getName(): String {
-     return this.name
+    getter 커스텀은 자바처럼은 오버라이딩 불가능하다
+    fun getName(): String{
+       return this.name
     }
      */
 
-    fun getNames(): String {
-        return this.name
-    }
-
-    val getBrand :String
+    /** 아래처럼만 가능하다 */
+    val getBrand : String
         get() = this.brand
 
     // get 에 로직이 있다면 아래처럼도 가능하다
@@ -74,7 +71,6 @@ fun main() {
 
     println("${varTender.brand} ${varTender.name} 의 나이는 ${varTender.age}")
     println(varTender.getBrand)
-    println(varTender.getNames())
     println(varTender.allExpress)
     println(varTender.quantity)
 

@@ -33,7 +33,7 @@ fun main() {
 
     // nonNull 타입과 Nothing 타입의 관계
     // 변수 str 은 null 이지만 c 변수에 대해 안전연산자를 달아주지않아도(nonNull type 지정해도)이어도 컴파일에러가 안난다.
-    // why? 어차피 우변에서 Nothing 타입을 리턴 를 하고 있으므로 그걸 컴파일러가 해석함. 이 경우 절대 null 이 나올 수 없으니까!
+    // why? 어차피 우변에서 Nothing 타입을 리턴를 하고 있으므로 그걸 컴파일러가 해석함. 이 경우 절대 null 이 나올 수 없으니까!
     val str : String? = null
     val c : String = str ?: failFast("예외")
     println(c.length)
