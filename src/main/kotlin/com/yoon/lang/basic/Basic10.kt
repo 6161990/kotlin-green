@@ -7,7 +7,7 @@ package com.yoon.lang.basic
 
 open class Dog {
     open var age : Int = 0
-ㅎ
+
     open fun bark(){
         println("멍멍")
     }
@@ -40,8 +40,8 @@ open class Cat(open var age: Int = 0) {
     }
 }
 
-open class Cheese : Cat(){
-    final override var age: Int = 0;
+open class Cheese() : Cat(){
+    final override var age: Int = 0
     final override fun bark() {
         super.bark() // 하위 클래스에서 상위클래스의 property 나 method 에 접근해야하는 경우
     }

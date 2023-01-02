@@ -3,7 +3,7 @@ package com.yoon.lang.advanced
 import java.time.LocalDateTime
 
 /** 객체 선언과 싱글톤 : object
- *  상수들의 집합이나 유틸리티 성 클래스를 만들 때 많이 사용한다.
+ *  상수들의 집합이나 유틸리티 성 클래스를 만들때 많이 사용한다.
  * */
 
 object Singleton {
@@ -32,7 +32,7 @@ class MyClass{
     private constructor()
 
     companion object /**My Companion*/ { // 이름을 줄수도 있다.
-        val b = 2344;
+        val b = 2344
 
         fun newInstance() = MyClass()
     }

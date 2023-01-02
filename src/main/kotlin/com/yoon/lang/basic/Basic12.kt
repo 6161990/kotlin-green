@@ -42,6 +42,7 @@ fun main() {
     }
 
     // enum 각각의 상수 이름을 가지고 enum 클래스를 인스턴스화하는 방법을 보통 많이 사용함.
+    // 없으면 ? java.lang.IllegalArgumentException: No enum constant com.yoon.lang.basic.PaymentStatus.AID
     val paymentStatus = PaymentStatus.valueOf("PAID")
     println(paymentStatus.label)
 
@@ -58,6 +59,7 @@ fun main() {
 
     // enum 클래스의 상수들에는 두 가지 기본 프로퍼티가 존재
     println(PaymentStatus.PAID.name)
+    println(PaymentStatus.REFUNDED.label)
     println(PaymentStatus.UNPAID.ordinal)
     println(PaymentStatus.PAID.ordinal)
 

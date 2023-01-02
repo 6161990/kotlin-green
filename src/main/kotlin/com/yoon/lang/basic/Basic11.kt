@@ -48,7 +48,7 @@ class MyCart(override var coin: Int) : Cart, Order { // 복수의 interface 를 
         else println("${product.name}이(가) 카트에 추가됐습니다.")
 
         // 복수 인터페이스 구현에서 add 라는 메소드가 동일할 때, 사용하는 super<T> 키워드
-        super<Order>.add(product)
+        super.add(product)
 
         // 복수 인터페이스 구현에서 동일한 시그니처를 가진 printId 를 사용하려면
     }

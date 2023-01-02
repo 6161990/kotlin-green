@@ -20,16 +20,21 @@ fun main() {
     mutableListOf.add("원")
 
     // apply 를 통해 좀 더 가독성있게 리스트를 만들 수 있다.
+    // mutableListOf() 생성 후, apply
     mutableListOf<String>().apply {
         this.add("오늘은 크리스마스 이브")
         add("내일은 크리스마스")
     }
 
+    // 위 코드와 같음
+    val mutableListOf1 = mutableListOf<String>()
+    mutableListOf1.add("오늘은 크리스마스 이브")
+
 
     /** set */
     val immutableSet = setOf(1, 2, 4)
 
-    val mutableSet = setOf<Int>(1, 2, 4)
+    val immutableSet2 = setOf<Int>(1, 2, 4)
 
     val mutableSetForApply = mutableSetOf<Int>().apply {
         add(1)
@@ -43,7 +48,7 @@ fun main() {
     mutableMapOf("one" to 1)
     val mutableMapOf = mutableMapOf<String, Int>()
     mutableMapOf.put("one", 1) // 가능하지만 추천하지 않고
-    mutableMapOf["two"] = 2    // 이렇게 iterable 로 넣는 것은 코틀린에서 추천.
+    mutableMapOf["two"] = 2    // 이렇게 iterable 로 넣는 것은 코틀린에서 추천.  why??
     mutableMapOf["three"] = 3
 
 
@@ -54,7 +59,7 @@ fun main() {
         add(3)
     }
 
-    /** 기타 list 의 구현체들을 생성자를 이용한다. */
+    /** 기타 list 의 구현체들은 생성자를 이용한다. */
     // LinkedList
     val linkedList = LinkedList<Int>().apply {
         addFirst(3)
@@ -98,7 +103,7 @@ fun main() {
 
     println("before : $upperCaseList")
 
-    val upperCase = lowCaseList.map { it.uppercase() }  // map 사용
+    val upperCase = lowCaseList.map { it.uppercase() }  // map 사용 : it 키워드 이용
     println("after : $upperCase")
 
     /** for loop -> filter */
