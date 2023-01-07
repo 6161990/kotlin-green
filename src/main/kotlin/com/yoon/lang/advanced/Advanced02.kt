@@ -46,7 +46,7 @@ fun main() {
     val person = Person("soo", 20)
     println("이름 = ${person.component1()}, 나이 = ${person.component2()}")
 
-    /** 구조분해 할당 */
+    /** 구조분해 할당 : 디컴파일 해보면 내부적으로 component N 을 활용하고 있다. */
     val (name, age) = person
     println("이름 = ${name}, 나이 = $age")
 

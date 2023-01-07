@@ -23,7 +23,7 @@ fun getHello() = "안녕하세요"
 
 /** 가변 프로퍼티에 대한 지연 초기화 : Late initialization
  * 특정 프레임워크나 라이브러리에서 DI 또는 외부에서 초기화를 해줘야하는 상황을 위한 것 : 초기화 전에 호출해도 컴파일 에러는 발생하지 않는 이유
- * 초기화 전에 호출한다면 UninitializedPropertyAccessException 발생
+ * 초기화 전에 호출한다면 ㄱUninitializedPropertyAccessException 발생
  * 해당 프로퍼티가 초기화되었는지 확인할 수 있는 방법, isInitialized : 하지만 외부에서 바로 접근할 수 없는 프로퍼티. 해당 클래스에 직접 변수를 만들어 접근하는 방법 사용해야한다.
  * Non-null
  */
