@@ -42,7 +42,7 @@ fun main() {
     println("$a1 !! $b2 !! $c3")
 
     val mutableMapOf = mutableMapOf("상도" to "윤지")
-    for ( (key, value) in mutableMapOf){
+    for ((key, value) in mutableMapOf) {
         println("$key 에는 $value 가 산다")
     }
 
