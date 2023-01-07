@@ -68,6 +68,40 @@ fun main() {
     }
 
     println(resultRun)
+
+
+    /** with() : 확장함수가 아니라 매개변수로 참조값을 넣어 사용한다. **/
+    val resultWith = with(DataBaseClient()) {
+        this.url = "https://localhost:"
+        password = "12345"
+        userName = "nana"
+        connect()
+    }
+    println("with() : $resultWith")
+
+
+    /** apply 수신 객체 프로퍼티를 구성하고 수신 객체 결과를 그대로 반환하고 싶을 때 사용.
+     *  수신 객체 자체가 반환(return) 된다.
+     *  프로퍼티에 대한 초기화나 수정할 때 사용한다.
+     *  여기에 체이닝으로 connect return 값을 받아올 수 있다. */
+    val resultApply: DataBaseClient = DataBaseClient().apply {
+        this.url = "https://localhost:"
+        password = "12345"
+        userName = "nana"
+        connect()
+    }
+    println("apply() : $resultApply")
+
+    /** also 수신 객체 프로퍼티에 대한 부수작업 후, 수신 객체 결과를 그대로 반환하고 싶을 때 사용. */
+    val user = User("케이트", "35")
+    user.validate()
+
+    /** 개선하기 */
+    val user2 : User = User("루나", "22").also {
+                            it.validate()
+                            it.printName()
+    }
+
 }
 
 
@@ -81,5 +115,20 @@ class DataBaseClient {
         Thread.sleep(100)
         println("DB 접속 성공")
         return true
+    }
+}
+
+class User(val name: String, val age: String) {
+
+    fun validate() {
+        if(name.isNotEmpty() && age.isNotEmpty()) {
+            println("검증성공")
+        }else {
+            println("검증실패")
+        }
+    }
+
+    fun printName(): String {
+        return name
     }
 }
