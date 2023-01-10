@@ -1,5 +1,7 @@
 package com.yoon.lang.kotilnInJava;
 
+import java.util.UUID;
+
 public class Person {
     private String name;
     private int age;
@@ -21,11 +23,15 @@ public class Person {
         this.age = age;
     }
 
-    public String getAddress() {
+    public String myAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getUUID(){
+        return UUID.randomUUID().toString();
     }
 }
