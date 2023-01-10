@@ -1,4 +1,4 @@
-package com.yoon.lang.kotilnInJava.useJvmStack
+package com.yoon.lang.kotilnInJava.use.jvmStack
 
 class HelloClass {
 

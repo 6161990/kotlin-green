@@ -1,4 +1,4 @@
-package com.yoon.lang.kotilnInJava.useJvmStack;
+package com.yoon.lang.kotilnInJava.use.jvmStack;
 
 public class JvmStaticExample {
 
@@ -17,5 +17,7 @@ public class JvmStaticExample {
         System.out.println(hello2);
         System.out.println(hi2);
 
+
+        /** @JvmField 키워드를 이용하여 정적 필드 호출하기 */
     }
 }
