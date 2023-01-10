@@ -1,8 +1,4 @@
-package com.yoon.lang.kotilnInJava;
-
-import kotlin.jvm.JvmDefault;
-import kotlin.jvm.JvmField;
-import kotlin.jvm.JvmInline;
+package com.yoon.lang.kotilnInJava.getterSetter;
 
 import java.time.LocalDate;
 

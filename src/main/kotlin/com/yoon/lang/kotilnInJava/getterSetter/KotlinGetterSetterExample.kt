@@ -1,4 +1,4 @@
-package com.yoon.lang.kotilnInJava
+package com.yoon.lang.kotilnInJava.getterSetter
 
 fun main() {
     // Java Style : 코틀린에서는 이렇게 getter, setter 접근을 추천하지 않음.

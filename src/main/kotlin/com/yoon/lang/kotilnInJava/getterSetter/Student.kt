@@ -1,4 +1,4 @@
-package com.yoon.lang.kotilnInJava
+package com.yoon.lang.kotilnInJava.getterSetter
 
 import java.time.LocalDate
 
