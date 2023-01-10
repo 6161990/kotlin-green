@@ -6,9 +6,10 @@ fun main() {
     helloLombokTest.address = "강남구"
     println(helloLombokTest.address)
 
+    /** Kotlin: Cannot access 'age': it is private in 'HelloLombokTest'
     helloLombokTest.age = 21
-    println(helloLombokTest.age) // Kotlin: Cannot access 'age': it is private in 'HelloLombokTest'
-    /** why ? 코틀린과 자바 통합 플젝의 경우 컴파일 되는 순서가 있는데,
+    println(helloLombokTest.age)
+     why ? 코틀린과 자바 통합 플젝의 경우 컴파일 되는 순서가 있는데,
      * 코틀린 -> 자바 -> 애노테이션 프로세싱 순으로 컴파일되기 때문에
      * lombok 을 코틀린에서 프로세싱하지 못함.
      *
