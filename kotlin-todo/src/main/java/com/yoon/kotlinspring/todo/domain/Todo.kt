@@ -8,7 +8,7 @@ import javax.persistence.*
 class Todo(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id :Long,
+    val id :Long? = 0,
 
     @Column(name = "title")
     var title: String,
