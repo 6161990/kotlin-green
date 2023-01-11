@@ -15,7 +15,8 @@ data class TodoResponse(
     companion object {
         fun of(todo: Todo?): TodoResponse {
             checkNotNull(todo) { "Todo is null" }
-
+            /** checkNotNull() 함수를 타고나면 todo 가 안전연산자사용 하고 있지 않은데도 컴파일에러를 내뱉지 않는다.
+             * why? checkNotNull() 내부에서 null 이면 exception 을 내뱉고 있는데, 컴파일러가 이를 인지하고 있기 때문에.*/
             return TodoResponse(
                 id = todo.id,
                 title = todo.title,
