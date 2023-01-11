@@ -1,4 +1,4 @@
-package com.fastcampus.kotlinspring.todo.domain;
+package com.yoon.kotlinspring.todo.domain;
 
 import java.time.LocalDateTime;
 import javax.persistence.Column;

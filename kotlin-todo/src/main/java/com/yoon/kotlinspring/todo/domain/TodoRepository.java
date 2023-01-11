@@ -1,4 +1,4 @@
-package com.fastcampus.kotlinspring.todo.domain;
+package com.yoon.kotlinspring.todo.domain;
 
 import java.util.List;
 import java.util.Optional;

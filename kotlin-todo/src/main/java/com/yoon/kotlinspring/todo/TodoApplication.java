@@ -1,4 +1,4 @@
-package com.fastcampus.kotlinspring.todo;
+package com.yoon.kotlinspring.todo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

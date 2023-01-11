@@ -1,6 +1,6 @@
-package com.fastcampus.kotlinspring.todo.api.model;
+package com.yoon.kotlinspring.todo.api.model;
 
-import com.fastcampus.kotlinspring.todo.domain.Todo;
+import com.yoon.kotlinspring.todo.domain.Todo;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Data;
