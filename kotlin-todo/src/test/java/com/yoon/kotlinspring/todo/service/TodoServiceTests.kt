@@ -15,7 +15,7 @@ import java.time.LocalDateTime
 @ExtendWith(SpringExtension::class)
 class TodoServiceTests {
 
-    @MockkBean
+    @MockkBean // 나중에 초기화 할 수 있도록
     lateinit var todoRepository: TodoRepository
 
     private lateinit var todoService: TodoService
