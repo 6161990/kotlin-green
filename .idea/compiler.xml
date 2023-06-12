@@ -5,6 +5,7 @@
       <profile default="true" name="Default" enabled="true" />
     </annotationProcessing>
     <bytecodeTargetLevel target="17">
+      <module name="book" target="17" />
       <module name="kotiln-green" target="17" />
       <module name="kotiln-green.kotlin-red" target="17" />
       <module name="kotiln-green.kotlin-red.main" target="17" />
