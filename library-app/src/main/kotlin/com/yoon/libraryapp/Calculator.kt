@@ -1,28 +1,24 @@
 package com.yoon.libraryapp
 
 class Calculator(
-    private var _number: Int
+    var number: Int
 ) {
-
-    val number: Int
-        get() = this._number
-
     fun add(operand: Int){
-        this._number += operand
+        this.number += operand
     }
 
     fun minus(operand: Int){
-        this._number -= operand
+        this.number -= operand
     }
 
     fun multiply(operand: Int){
-        this._number *= operand
+        this.number *= operand
     }
 
     fun divide(operand: Int){
         if(operand == 0){
             throw IllegalArgumentException("0 으로 나눌 수 없습니다.")
         }
-        this._number /= operand
+        this.number /= operand
     }
 }
