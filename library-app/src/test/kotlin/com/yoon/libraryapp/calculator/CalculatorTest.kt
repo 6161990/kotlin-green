@@ -1,6 +1,7 @@
 package com.yoon.libraryapp.calculator
 
 import com.yoon.libraryapp.Calculator
+import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 
 fun main() {
@@ -9,6 +10,7 @@ fun main() {
     calculatorTest.minusTest()
     calculatorTest.multiplyTest()
     calculatorTest.divideTest()
+    calculatorTest.divideTestWhenZero()
 }
 
 class CalculatorTest {
@@ -46,5 +48,19 @@ class CalculatorTest {
         if(calculator.number != 1){
             throw IllegalStateException("expected != calculator")
         }
+    }
+
+    fun divideTestWhenZero() {
+        val calculator = Calculator(5)
+        try {
+            calculator.divide(0)
+        }catch (e: IllegalArgumentException){
+            println("성공")
+        }catch (e: Exception){
+            throw IllegalStateException("expected != calculator")
+        }
+            throw IllegalStateException("기대하는 예외 발생하지 않음 ")
+
+
     }
 }
