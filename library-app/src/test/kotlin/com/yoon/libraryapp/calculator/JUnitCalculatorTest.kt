@@ -64,5 +64,13 @@ class JUnitCalculatorTest {
         }.message
 
         assertThat(message).isEqualTo("0 으로 나눌 수 없습니다.")
+
+
+        assertThrows<IllegalArgumentException>() {
+            calculator.divide(0)
+        }.apply {
+            assertThat(message).isEqualTo("0 으로 나눌 수 없습니다.")
+        }
+
     }
 }
