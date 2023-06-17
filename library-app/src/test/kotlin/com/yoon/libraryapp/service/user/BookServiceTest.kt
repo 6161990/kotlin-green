@@ -1,37 +1,47 @@
 package com.yoon.libraryapp.service.user
 
+import com.ninjasquad.springmockk.MockkBean
+import com.yoon.libraryapp.domain.book.Book
 import com.yoon.libraryapp.domain.book.BookRepository
 import com.yoon.libraryapp.domain.user.UserRepository
 import com.yoon.libraryapp.domain.user.loanhistory.UserLoanHistoryRepository
-import com.yoon.libraryapp.dto.book.request.BookRequest
 import com.yoon.libraryapp.service.book.BookService
+import io.mockk.every
 import org.assertj.core.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.mockito.Mock
-import org.mockito.Mockito.mock
-import org.springframework.boot.test.context.SpringBootTest
+import org.junit.jupiter.api.extension.ExtendWith
+import org.springframework.test.context.junit.jupiter.SpringExtension
 
-@SpringBootTest
-class BookServiceTest constructor(
-    @Mock
-    private val bookRepository: BookRepository,
+@ExtendWith(SpringExtension::class)
+class BookServiceTest {
+    @MockkBean
+    lateinit var bookRepository: BookRepository
 
-    @Mock
-    private val userRepository: UserRepository,
+    @MockkBean
+    lateinit var userRepository: UserRepository
 
-    @Mock
-    private val userLoanHistoryRepository: UserLoanHistoryRepository,
+    @MockkBean
+    lateinit var userLoanHistoryRepository: UserLoanHistoryRepository
 
-    private val bookService: BookService = BookService(bookRepository, userRepository, userLoanHistoryRepository),
-){
+    private lateinit var bookService: BookService
+
+    private val book = Book("이토록")
+
+    @BeforeEach
+    fun setUp() {
+        bookService = BookService(bookRepository, userRepository, userLoanHistoryRepository)
+    }
 
     @Test
-    fun name() {
-        val request = BookRequest("이토록 평범한 미래")
+    fun saveBook() {
+        every { bookRepository.save(book) } returns book
+        every { bookRepository.findAll() } returns listOf(book)
 
-        bookService.saveBook(request)
+        bookService.saveBook(book)
 
         val findAll = bookRepository.findAll()
         assertThat(findAll).hasSize(1)
+        assertThat(findAll[0].name).isEqualTo("이토록")
     }
 }

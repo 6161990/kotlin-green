@@ -1,5 +1,6 @@
 package com.yoon.libraryapp.controller.book;
 
+import com.yoon.libraryapp.domain.book.Book;
 import com.yoon.libraryapp.dto.book.request.BookLoanRequest;
 import com.yoon.libraryapp.dto.book.request.BookRequest;
 import com.yoon.libraryapp.dto.book.request.BookReturnRequest;
@@ -20,7 +21,7 @@ public class BookController {
 
   @PostMapping("/book")
   public void saveBook(@RequestBody BookRequest request) {
-    bookService.saveBook(request);
+    bookService.saveBook(new Book(request.getName()));
   }
 
   @PostMapping("/book/loan")
