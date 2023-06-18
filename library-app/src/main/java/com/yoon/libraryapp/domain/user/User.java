@@ -2,6 +2,7 @@ package com.yoon.libraryapp.domain.user;
 
 import com.yoon.libraryapp.domain.book.Book;
 import com.yoon.libraryapp.domain.user.loanhistory.UserLoanHistory;
+import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -12,6 +13,7 @@ import java.util.List;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
+@NoArgsConstructor
 public class User {
 
   @Id
@@ -25,10 +27,6 @@ public class User {
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
   private final List<UserLoanHistory> userLoanHistories = new ArrayList<>();
-
-  public User() {
-
-  }
 
   public User(String name, Integer age) {
     if (name.isBlank()) {
