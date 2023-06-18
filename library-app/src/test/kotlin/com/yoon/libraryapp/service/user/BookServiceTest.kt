@@ -86,6 +86,10 @@ class BookServiceTest {
 
         val request = BookLoanRequest(user.name, book.name)
 
-        assertThrows<IllegalArgumentException> { bookService.loanBook(request) }
+        assertThrows<IllegalArgumentException> {
+            bookService.loanBook(request)
+        }.apply {
+            assertThat(message).isEqualTo("진작 대출되어 있는 책입니다")
+        }
     }
 }
