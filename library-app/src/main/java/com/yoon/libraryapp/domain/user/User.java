@@ -1,7 +1,7 @@
 package com.yoon.libraryapp.domain.user;
 
 import com.yoon.libraryapp.domain.book.Book;
-import com.yoon.libraryapp.domain.user.loanhistory.UserLoanHistory;
+import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistory;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -41,7 +41,7 @@ public class User {
   }
 
   public void loanBook(Book book) {
-    this.userLoanHistories.add(new UserLoanHistory(this, book.getName(), false));
+    this.userLoanHistories.add(new UserLoanHistory(this, book.getName(), false, null));
   }
 
   public void returnBook(String bookName) {
