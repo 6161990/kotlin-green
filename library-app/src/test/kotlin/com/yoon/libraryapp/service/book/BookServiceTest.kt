@@ -1,9 +1,9 @@
-package com.yoon.libraryapp.service.user
+package com.yoon.libraryapp.service.book
 
 import com.ninjasquad.springmockk.MockkBean
 import com.yoon.libraryapp.domain.book.Book
-import com.yoon.libraryapp.domain.book.BookRepository
 import com.yoon.libraryapp.domain.user.User
+import com.yoon.libraryapp.domain.book.BookRepository
 import com.yoon.libraryapp.domain.user.UserRepository
 import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistory
 import com.yoon.libraryapp.domain.user.loanhistory.UserLoanHistoryRepository

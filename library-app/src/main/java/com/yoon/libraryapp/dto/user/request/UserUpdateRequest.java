@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class UserUpdateRequest {
 
-  private long id;
+  private Long id;
   private String name;
 
 }
