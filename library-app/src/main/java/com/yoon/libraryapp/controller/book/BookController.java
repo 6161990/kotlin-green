@@ -21,7 +21,7 @@ public class BookController {
 
   @PostMapping("/book")
   public void saveBook(@RequestBody BookRequest request) {
-    bookService.saveBook(new Book(request.getName()));
+    bookService.saveBook(new Book(request.getName(), null));
   }
 
   @PostMapping("/book/loan")
