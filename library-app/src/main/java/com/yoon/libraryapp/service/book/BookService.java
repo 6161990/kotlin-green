@@ -4,7 +4,7 @@ import com.yoon.libraryapp.domain.book.Book;
 import com.yoon.libraryapp.domain.book.BookRepository;
 import com.yoon.libraryapp.domain.user.User;
 import com.yoon.libraryapp.domain.user.UserRepository;
-import com.yoon.libraryapp.domain.user.loanhistory.UserLoanHistoryRepository;
+import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistoryRepository;
 import com.yoon.libraryapp.dto.book.request.BookLoanRequest;
 import com.yoon.libraryapp.dto.book.request.BookReturnRequest;
 import org.springframework.stereotype.Service;
