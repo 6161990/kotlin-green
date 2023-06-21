@@ -7,7 +7,7 @@ import javax.persistence.Id
 
 @Entity
 // NoArgConstructor 가 존재해야 Jpa entity 로 등록이 가능하다.
-class Book(
+class Book constructor(
     val name: String, // getter 가 붙어버림
 
     @Id

@@ -5,7 +5,7 @@ import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistory
 import javax.persistence.*
 
 @Entity
-class User(
+class User constructor(
     var name: String,
     val age: Int? = null,
 
