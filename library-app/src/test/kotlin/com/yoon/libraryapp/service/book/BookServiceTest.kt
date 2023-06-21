@@ -6,10 +6,9 @@ import com.yoon.libraryapp.domain.user.User
 import com.yoon.libraryapp.domain.book.BookRepository
 import com.yoon.libraryapp.domain.user.UserRepository
 import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistory
-import com.yoon.libraryapp.domain.user.loanhistory.UserLoanHistoryRepository
+import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistoryRepository
 import com.yoon.libraryapp.dto.book.request.BookLoanRequest
 import com.yoon.libraryapp.dto.book.request.BookReturnRequest
-import com.yoon.libraryapp.service.book.BookService
 import io.mockk.every
 import io.mockk.verify
 import org.assertj.core.api.Assertions.*

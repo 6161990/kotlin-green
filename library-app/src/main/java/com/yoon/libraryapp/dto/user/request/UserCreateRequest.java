@@ -1,12 +1,18 @@
 package com.yoon.libraryapp.dto.user.request;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 
-@Getter
 @AllArgsConstructor
 public class UserCreateRequest {
 
   private String name;
   private Integer age;
+
+  public String getName() {
+    return name;
+  }
+
+  public Integer getAge() {
+    return age;
+  }
 }

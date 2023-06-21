@@ -41,7 +41,7 @@ class UserServiceTest @Autowired constructor(
             User("k", null)
         ))
 
-        val users = userService.users
+        val users = userService.getUsers()
 
         assertThat(users).hasSize(2)
         assertThat(users).extracting("name").containsExactlyInAnyOrder("yoon", "k")
