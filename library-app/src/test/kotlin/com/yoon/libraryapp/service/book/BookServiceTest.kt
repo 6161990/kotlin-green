@@ -52,7 +52,7 @@ class BookServiceTest {
     fun returnBook() {
         val user = User("k", 24)
         user.loanBook(book)
-        every { userRepository.findByName(user.name) } returns Optional.of(user)
+        every { userRepository.findByName(user.name) } returns user
 
         val request = BookReturnRequest(user.name, book.name)
         bookService.returnBook(request)
@@ -63,8 +63,8 @@ class BookServiceTest {
     @Test
     fun loanBook() {
         val user = User("k", 24)
-        every { userRepository.findByName(user.name) } returns Optional.of(user)
-        every { bookRepository.findByName(book.name) } returns Optional.of(book)
+        every { userRepository.findByName(user.name) } returns user
+        every { bookRepository.findByName(book.name) } returns book
         every { userLoanHistoryRepository.findByBookNameAndIsReturn(book.name, false) } returns null
 
         val request = BookLoanRequest(user.name, book.name)
@@ -79,8 +79,8 @@ class BookServiceTest {
     fun loanBookWhenAlreadyLoan() {
         val user = User("k", 24)
         val userLoanHistory = UserLoanHistory(user, book.name, false)
-        every { userRepository.findByName(user.name) } returns Optional.of(user)
-        every { bookRepository.findByName(book.name) } returns Optional.of(book)
+        every { userRepository.findByName(user.name) } returns user
+        every { bookRepository.findByName(book.name) } returns book
         every { userLoanHistoryRepository.findByBookNameAndIsReturn(book.name, false) } returns userLoanHistory
 
         val request = BookLoanRequest(user.name, book.name)
