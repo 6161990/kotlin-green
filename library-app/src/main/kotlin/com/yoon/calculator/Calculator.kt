@@ -1,4 +1,4 @@
-package com.yoon.libraryapp
+package com.yoon.calculator
 
 class Calculator(
     var number: Int

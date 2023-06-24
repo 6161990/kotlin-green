@@ -1,12 +1,10 @@
 package com.yoon.libraryapp.calculator
 
-import com.yoon.libraryapp.Calculator
+import com.yoon.calculator.Calculator
 import org.assertj.core.api.Assertions.*
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
-import java.lang.IllegalStateException
 
 class JUnitCalculatorTest {
 

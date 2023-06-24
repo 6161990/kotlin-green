@@ -1,6 +1,6 @@
 package com.yoon.libraryapp.calculator
 
-import com.yoon.libraryapp.Calculator
+import com.yoon.calculator.Calculator
 import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 
