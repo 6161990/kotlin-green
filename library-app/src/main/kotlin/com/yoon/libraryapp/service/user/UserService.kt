@@ -5,6 +5,8 @@ import com.yoon.libraryapp.domain.user.UserRepository
 import com.yoon.libraryapp.dto.user.request.UserCreateRequest
 import com.yoon.libraryapp.dto.user.request.UserUpdateRequest
 import com.yoon.libraryapp.dto.user.response.UserResponse
+import com.yoon.libraryapp.utils.fail
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -14,7 +16,7 @@ class UserService(
 ) {
 
     @Transactional
-    fun saveUser(request: UserCreateRequest){
+    fun saveUser(request: UserCreateRequest) {
         val user = User(request.name, request.age)
         userRepository.save(user)
     }
@@ -32,8 +34,8 @@ class UserService(
     }
 
     @Transactional
-    fun deleteUser(name: String){
-        val user = userRepository.findByName(name).orElseThrow(::IllegalArgumentException)
+    fun deleteUser(name: String) {
+        val user = userRepository.findByName(name) ?: fail()
         userRepository.delete(user)
     }
 }
