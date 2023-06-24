@@ -29,7 +29,7 @@ class UserService(
 
     @Transactional
     fun updateUserName(request: UserUpdateRequest){
-        val user = userRepository.findById(request.id).orElseThrow(::IllegalArgumentException)
+        val user = userRepository.findByIdOrNull(request.id) ?: fail()
         user.updateName(request.name)
     }
 
