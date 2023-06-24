@@ -7,7 +7,6 @@ import com.yoon.libraryapp.dto.user.request.UserUpdateRequest
 import com.yoon.libraryapp.dto.user.response.UserResponse
 import com.yoon.libraryapp.utils.fail
 import com.yoon.libraryapp.utils.findByIdOrThrow
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -25,7 +24,7 @@ class UserService(
     @Transactional(readOnly = true)
     fun getUsers() : List<UserResponse> {
         return userRepository.findAll()
-            .map { user -> UserResponse(user) }
+            .map { user -> UserResponse.of(user) }
     }
 
     @Transactional

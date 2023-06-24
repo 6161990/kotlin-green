@@ -1,18 +1,21 @@
-package com.yoon.libraryapp.dto.user.response;
+package com.yoon.libraryapp.dto.user.response
 
-import com.yoon.libraryapp.domain.user.User;
-import lombok.Getter;
+import com.yoon.libraryapp.domain.user.User
 
-@Getter
-public class UserResponse {
+data class UserResponse(
+    private val id: Long,
+    private val name: String,
+    private val age: Int?
+) {
 
-  private final long id;
-  private final String name;
-  private final Integer age;
+    companion object{
+        fun of(user: User): UserResponse {
+            return UserResponse(
+                id = user.id!!,
+                name = user.name,
+                age = user.age
+            )
+        }
+    }
 
-  public UserResponse(User user) {
-    this.id = user.getId();
-    this.name = user.getName();
-    this.age = user.getAge();
-  }
 }
