@@ -7,6 +7,8 @@ import com.yoon.libraryapp.domain.book.BookRepository
 import com.yoon.libraryapp.domain.user.UserRepository
 import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistory
 import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistoryRepository
+import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistoryType
+import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistoryType.LOANED
 import com.yoon.libraryapp.dto.book.request.BookLoanRequest
 import com.yoon.libraryapp.dto.book.request.BookReturnRequest
 import io.mockk.every
@@ -65,23 +67,23 @@ class BookServiceTest {
         val user = User("k", 24)
         every { userRepository.findByName(user.name) } returns user
         every { bookRepository.findByName(book.name) } returns book
-        every { userLoanHistoryRepository.findByBookNameAndIsReturn(book.name, false) } returns null
+        every { userLoanHistoryRepository.findByBookNameAndStatus(book.name, LOANED) } returns null
 
         val request = BookLoanRequest(user.name, book.name)
         bookService.loanBook(request)
 
         verify { userRepository.findByName(user.name) }
         verify { bookRepository.findByName(book.name) }
-        verify { userLoanHistoryRepository.findByBookNameAndIsReturn(book.name, false) }
+        verify { userLoanHistoryRepository.findByBookNameAndStatus(book.name, LOANED) }
     }
 
     @Test
     fun loanBookWhenAlreadyLoan() {
         val user = User("k", 24)
-        val userLoanHistory = UserLoanHistory(user, book.name, false)
+        val userLoanHistory = UserLoanHistory.fixture(user, book.name)
         every { userRepository.findByName(user.name) } returns user
         every { bookRepository.findByName(book.name) } returns book
-        every { userLoanHistoryRepository.findByBookNameAndIsReturn(book.name, false) } returns userLoanHistory
+        every { userLoanHistoryRepository.findByBookNameAndStatus(book.name, LOANED) } returns userLoanHistory
 
         val request = BookLoanRequest(user.name, book.name)
 

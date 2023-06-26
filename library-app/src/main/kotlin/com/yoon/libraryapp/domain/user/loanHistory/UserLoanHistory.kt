@@ -1,20 +1,19 @@
 package com.yoon.libraryapp.domain.user.loanHistory
 
 import com.yoon.libraryapp.domain.user.User
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.ManyToOne
+import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistoryType.LOANED
+import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistoryType.RETURNED
+import javax.persistence.*
 
 @Entity
 class UserLoanHistory(
     @ManyToOne
     val user: User,
 
-    val bookName:String,
+    val bookName: String,
 
-    var isReturn: Boolean,
+    @Enumerated(EnumType.STRING)
+    var status: UserLoanHistoryType = LOANED,
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +21,20 @@ class UserLoanHistory(
 ) {
 
     fun doReturn(){
-        this.isReturn = true
+        this.status = RETURNED
+    }
+
+    companion object{
+        fun fixture(
+            user: User,
+            bookName: String = "이상한 나라의 앨리스",
+            status: UserLoanHistoryType = LOANED,
+            id: Long? = null
+        ): UserLoanHistory{
+            return UserLoanHistory(
+                user, bookName, status, id
+            )
+        }
     }
 
 }

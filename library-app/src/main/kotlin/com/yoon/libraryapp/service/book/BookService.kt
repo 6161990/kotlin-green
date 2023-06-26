@@ -4,6 +4,7 @@ import com.yoon.libraryapp.domain.book.Book
 import com.yoon.libraryapp.domain.book.BookRepository
 import com.yoon.libraryapp.domain.user.UserRepository
 import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistoryRepository
+import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistoryType
 import com.yoon.libraryapp.dto.book.request.BookLoanRequest
 import com.yoon.libraryapp.dto.book.request.BookReturnRequest
 import com.yoon.libraryapp.utils.fail
@@ -25,7 +26,7 @@ class  BookService(
     @Transactional
     fun loanBook(request: BookLoanRequest){
         val book = bookRepository.findByName(request.bookName) ?: fail()
-        if(userLoanHistoryRepository.findByBookNameAndIsReturn(request.bookName,false)!= null){
+        if(userLoanHistoryRepository.findByBookNameAndStatus(request.bookName, UserLoanHistoryType.LOANED)!= null){
             throw IllegalArgumentException("진작 대출되어 있는 책입니다")
         }
 
