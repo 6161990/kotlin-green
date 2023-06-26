@@ -17,7 +17,7 @@ class BookController(
 
     @PostMapping("/book")
     fun saveBook(@RequestBody request: BookRequest){
-        bookService.saveBook(Book(request.name, null))
+        bookService.saveBook(Book(request.name, request.type, null))
     }
 
     @PostMapping("/book/loan")

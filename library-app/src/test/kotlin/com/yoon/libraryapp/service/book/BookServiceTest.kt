@@ -32,7 +32,7 @@ class BookServiceTest {
 
     private lateinit var bookService: BookService
 
-    private val book = Book("이토록")
+    private val book = Book.fixtures("이토록")
 
     @BeforeEach
     fun setUp() {
