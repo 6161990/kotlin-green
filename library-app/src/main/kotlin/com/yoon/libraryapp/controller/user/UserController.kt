@@ -1,8 +1,8 @@
 package com.yoon.libraryapp.controller.user
 
-import com.yoon.libraryapp.domain.user.User
 import com.yoon.libraryapp.dto.user.request.UserCreateRequest
 import com.yoon.libraryapp.dto.user.request.UserUpdateRequest
+import com.yoon.libraryapp.dto.user.response.UserLoanHistoryResponse
 import com.yoon.libraryapp.dto.user.response.UserResponse
 import com.yoon.libraryapp.service.user.UserService
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -36,5 +36,10 @@ class UserController(
     @DeleteMapping("/user")
     fun deleteUser(@RequestParam name: String){
         userService.deleteUser(name)
+    }
+
+    @GetMapping("/user/loan")
+    fun getUserLoanHistories() : List<UserLoanHistoryResponse>{
+        return userService.getUserLoanHistories()
     }
 }
