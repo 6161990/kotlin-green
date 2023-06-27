@@ -4,7 +4,7 @@ import com.yoon.libraryapp.domain.user.User
 import com.yoon.libraryapp.domain.user.UserRepository
 import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistory
 import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistoryRepository
-import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistoryType
+import com.yoon.libraryapp.domain.user.loanHistory.UserLoanStatus
 import com.yoon.libraryapp.dto.user.request.UserCreateRequest
 import com.yoon.libraryapp.dto.user.request.UserUpdateRequest
 import org.assertj.core.api.Assertions.*
@@ -87,9 +87,9 @@ class UserServiceTest @Autowired constructor(
         val user = userRepository.save(User("A", null))
         userLoanHistoryRepository.saveAll(
             listOf(
-                UserLoanHistory.fixture(user, "책 1", UserLoanHistoryType.LOANED),
-                UserLoanHistory.fixture(user, "책 2", UserLoanHistoryType.LOANED),
-                UserLoanHistory.fixture(user, "책 3", UserLoanHistoryType.RETURNED),
+                UserLoanHistory.fixture(user, "책 1", UserLoanStatus.LOANED),
+                UserLoanHistory.fixture(user, "책 2", UserLoanStatus.LOANED),
+                UserLoanHistory.fixture(user, "책 3", UserLoanStatus.RETURNED),
         ))
 
         val actual = userService.getUserLoanHistories()
@@ -113,9 +113,9 @@ class UserServiceTest @Autowired constructor(
 
         userLoanHistoryRepository.saveAll(
             listOf(
-                UserLoanHistory.fixture(users[0], "책 1", UserLoanHistoryType.LOANED),
-                UserLoanHistory.fixture(users[0], "책 2", UserLoanHistoryType.LOANED),
-                UserLoanHistory.fixture(users[0], "책 3", UserLoanHistoryType.RETURNED),
+                UserLoanHistory.fixture(users[0], "책 1", UserLoanStatus.LOANED),
+                UserLoanHistory.fixture(users[0], "책 2", UserLoanStatus.LOANED),
+                UserLoanHistory.fixture(users[0], "책 3", UserLoanStatus.RETURNED),
             ))
 
         val actual = userService.getUserLoanHistories()

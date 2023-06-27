@@ -4,9 +4,10 @@ import com.yoon.libraryapp.domain.book.Book
 import com.yoon.libraryapp.domain.book.BookRepository
 import com.yoon.libraryapp.domain.user.UserRepository
 import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistoryRepository
-import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistoryType
+import com.yoon.libraryapp.domain.user.loanHistory.UserLoanStatus
 import com.yoon.libraryapp.dto.book.request.BookLoanRequest
 import com.yoon.libraryapp.dto.book.request.BookReturnRequest
+import com.yoon.libraryapp.dto.book.response.BookStatResponse
 import com.yoon.libraryapp.utils.fail
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -26,7 +27,7 @@ class  BookService(
     @Transactional
     fun loanBook(request: BookLoanRequest){
         val book = bookRepository.findByName(request.bookName) ?: fail()
-        if(userLoanHistoryRepository.findByBookNameAndStatus(request.bookName, UserLoanHistoryType.LOANED)!= null){
+        if(userLoanHistoryRepository.findByBookNameAndStatus(request.bookName, UserLoanStatus.LOANED)!= null){
             throw IllegalArgumentException("진작 대출되어 있는 책입니다")
         }
 
@@ -38,6 +39,26 @@ class  BookService(
     fun returnBook(request: BookReturnRequest){
         val user = userRepository.findByName(request.userName) ?: fail()
         user.returnBook(request.bookName)
+    }
+
+    @Transactional(readOnly = true)
+    fun countLoanedBook(): Int {
+        return  userLoanHistoryRepository.findAllByStatus(UserLoanStatus.LOANED).size
+    }
+
+    @Transactional(readOnly = true)
+    fun getBookStatistics(): List<BookStatResponse> {
+        val results = mutableListOf<BookStatResponse>()
+        val books = bookRepository.findAll()
+        for (book in books) {
+            val targetDto = results.firstOrNull { dto -> book.type == dto.bookType }
+            if(targetDto == null){
+                results.add(BookStatResponse(book.type, 1))
+            }else {
+                targetDto.plusOne()
+            }
+        }
+        return results
     }
 
 

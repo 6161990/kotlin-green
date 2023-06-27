@@ -5,6 +5,8 @@ import com.yoon.libraryapp.dto.book.request.BookLoanRequest
 import com.yoon.libraryapp.service.book.BookService
 import com.yoon.libraryapp.dto.book.request.BookRequest
 import com.yoon.libraryapp.dto.book.request.BookReturnRequest
+import com.yoon.libraryapp.dto.book.response.BookStatResponse
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -28,5 +30,15 @@ class BookController(
     @PutMapping("/book/return")
     fun returnBook(@RequestBody request: BookReturnRequest){
         bookService.returnBook(request)
+    }
+
+    @GetMapping("/book/loan")
+    fun countLoanedBook() : Int{
+        return bookService.countLoanedBook()
+    }
+
+    @GetMapping("/book/stat")
+    fun getBookStatistics() : List<BookStatResponse> {
+        return bookService.getBookStatistics()
     }
 }

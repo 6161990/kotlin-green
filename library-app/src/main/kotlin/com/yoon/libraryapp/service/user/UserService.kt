@@ -2,10 +2,8 @@ package com.yoon.libraryapp.service.user
 
 import com.yoon.libraryapp.domain.user.User
 import com.yoon.libraryapp.domain.user.UserRepository
-import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistoryType
 import com.yoon.libraryapp.dto.user.request.UserCreateRequest
 import com.yoon.libraryapp.dto.user.request.UserUpdateRequest
-import com.yoon.libraryapp.dto.user.response.BookLoanHistoryResponse
 import com.yoon.libraryapp.dto.user.response.UserLoanHistoryResponse
 import com.yoon.libraryapp.dto.user.response.UserResponse
 import com.yoon.libraryapp.utils.fail

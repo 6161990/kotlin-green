@@ -1,6 +1,6 @@
 package com.yoon.libraryapp.domain.user.loanHistory
 
-enum class UserLoanHistoryType {
+enum class UserLoanStatus {
     LOANED,
     RETURNED
 }

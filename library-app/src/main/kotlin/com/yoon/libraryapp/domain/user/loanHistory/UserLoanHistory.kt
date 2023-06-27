@@ -1,8 +1,8 @@
 package com.yoon.libraryapp.domain.user.loanHistory
 
 import com.yoon.libraryapp.domain.user.User
-import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistoryType.LOANED
-import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistoryType.RETURNED
+import com.yoon.libraryapp.domain.user.loanHistory.UserLoanStatus.LOANED
+import com.yoon.libraryapp.domain.user.loanHistory.UserLoanStatus.RETURNED
 import javax.persistence.*
 
 @Entity
@@ -13,7 +13,7 @@ class UserLoanHistory(
     val bookName: String,
 
     @Enumerated(EnumType.STRING)
-    var status: UserLoanHistoryType = LOANED,
+    var status: UserLoanStatus = LOANED,
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,7 @@ class UserLoanHistory(
         fun fixture(
             user: User,
             bookName: String = "이상한 나라의 앨리스",
-            status: UserLoanHistoryType = LOANED,
+            status: UserLoanStatus = LOANED,
             id: Long? = null
         ): UserLoanHistory{
             return UserLoanHistory(
