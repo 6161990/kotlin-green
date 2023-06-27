@@ -94,6 +94,7 @@ class UserServiceTest @Autowired constructor(
 
         val actual = userService.getUserLoanHistories()
 
+        assertThat(actual).hasSize(1)
         assertThat(actual[0].name).isEqualTo("A")
         assertThat(actual[0].books).hasSize(3)
         assertThat(actual[0].books).extracting("isReturn")
