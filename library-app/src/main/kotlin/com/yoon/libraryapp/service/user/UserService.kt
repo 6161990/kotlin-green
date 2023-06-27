@@ -5,7 +5,7 @@ import com.yoon.libraryapp.domain.user.UserRepository
 import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistoryType
 import com.yoon.libraryapp.dto.user.request.UserCreateRequest
 import com.yoon.libraryapp.dto.user.request.UserUpdateRequest
-import com.yoon.libraryapp.dto.user.response.BookLoanHistory
+import com.yoon.libraryapp.dto.user.response.BookLoanHistoryResponse
 import com.yoon.libraryapp.dto.user.response.UserLoanHistoryResponse
 import com.yoon.libraryapp.dto.user.response.UserResponse
 import com.yoon.libraryapp.utils.fail
@@ -47,12 +47,7 @@ class UserService(
         return userRepository.findAllWithUserLoanHistories().map { user ->
             UserLoanHistoryResponse(
                 name = user.name,
-                books = user.userLoanHistory.map { history ->
-                    BookLoanHistory(
-                        name = history.bookName,
-                        isReturn = history.status == UserLoanHistoryType.RETURNED
-                    )
-                }
+                books = user.userLoanHistory.map(BookLoanHistoryResponse::of)
             )
         }
     }
