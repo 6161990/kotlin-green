@@ -51,12 +51,8 @@ class  BookService(
         val results = mutableListOf<BookStatResponse>()
         val books = bookRepository.findAll()
         for (book in books) {
-            val targetDto = results.firstOrNull { dto -> book.type == dto.bookType }
-            if(targetDto == null){
-                results.add(BookStatResponse(book.type, 1))
-            }else {
-                targetDto.plusOne()
-            }
+            results.firstOrNull { dto -> book.type == dto.bookType }?.plusOne()
+                ?: results.add(BookStatResponse(book.type, 1))
         }
         return results
     }
