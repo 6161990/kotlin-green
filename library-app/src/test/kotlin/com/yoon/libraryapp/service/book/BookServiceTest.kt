@@ -4,12 +4,14 @@ import com.ninjasquad.springmockk.MockkBean
 import com.yoon.libraryapp.domain.book.Book
 import com.yoon.libraryapp.domain.user.User
 import com.yoon.libraryapp.domain.book.BookRepository
+import com.yoon.libraryapp.domain.book.BookType
 import com.yoon.libraryapp.domain.user.UserRepository
 import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistory
 import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistoryRepository
 import com.yoon.libraryapp.domain.user.loanHistory.UserLoanStatus.LOANED
 import com.yoon.libraryapp.dto.book.request.BookLoanRequest
 import com.yoon.libraryapp.dto.book.request.BookReturnRequest
+import com.yoon.libraryapp.dto.book.response.BookStatResponse
 import io.mockk.every
 import io.mockk.verify
 import org.assertj.core.api.Assertions.*
@@ -91,5 +93,67 @@ class BookServiceTest {
         }.apply {
             assertThat(message).isEqualTo("진작 대출되어 있는 책입니다")
         }
+    }
+
+    @Test
+    fun countLoanedBook() {
+        val user = User("k", 24)
+        val userLoanHistory = UserLoanHistory.fixture(user, book.name)
+        val userLoanHistory4 = UserLoanHistory.fixture(user, book.name)
+        val userLoanHistories = mutableListOf(userLoanHistory, userLoanHistory4)
+        every { userLoanHistoryRepository.findAllByStatus(LOANED) } returns userLoanHistories
+
+        val actual = bookService.countLoanedBook()
+
+        assertThat(actual).isEqualTo(2)
+    }
+
+    @Test
+    fun getBookStatistics() {
+        val books = mutableListOf(
+                Book.fixtures("책1", BookType.SCIENCE),
+                Book.fixtures("책2", BookType.SCIENCE),
+                Book.fixtures("책3", BookType.MAGAZINE))
+        every { bookRepository.findAll() } returns books
+
+        val actual = bookService.getBookStatistics()
+
+        /**
+         * 없는 데이터라고 exception 발생
+         * val computers = actual.first { response ->
+            response.bookType == BookType.COMPUTER
+        }
+        assertThat(computers.count).isEqualTo(0)*/
+
+        val science = actual.first { response ->
+            response.bookType == BookType.SCIENCE
+        }
+        assertThat(science.count).isEqualTo(2)
+
+        val magazine = actual.first { response ->
+            response.bookType == BookType.MAGAZINE
+        }
+        assertThat(magazine.count).isEqualTo(1)
+    }
+
+
+    @Test
+    fun getBookStatistics_refactoring() {
+        val books = mutableListOf(
+            Book.fixtures("책1", BookType.SCIENCE),
+            Book.fixtures("책2", BookType.SCIENCE),
+            Book.fixtures("책3", BookType.MAGAZINE))
+        every { bookRepository.findAll() } returns books
+
+        val actual = bookService.getBookStatistics()
+
+        assertCount(actual, BookType.SCIENCE, 2)
+        assertCount(actual, BookType.MAGAZINE, 1)
+    }
+
+    private fun assertCount(actual: List<BookStatResponse>, type: BookType, expectedCount: Int){
+        assertThat(actual.first{
+            response -> response.bookType == type
+        }.count).isEqualTo(expectedCount)
     }
 }
