@@ -97,24 +97,19 @@ class BookServiceTest {
 
     @Test
     fun countLoanedBook() {
-        val user = User("k", 24)
-        val userLoanHistory = UserLoanHistory.fixture(user, book.name)
-        val userLoanHistory4 = UserLoanHistory.fixture(user, book.name)
-        val userLoanHistories = mutableListOf(userLoanHistory, userLoanHistory4)
-        every { userLoanHistoryRepository.findAllByStatus(LOANED) } returns userLoanHistories
+        every { userLoanHistoryRepository.countByStatus(LOANED) } returns 2L
 
         val actual = bookService.countLoanedBook()
 
-        assertThat(actual).isEqualTo(2)
+        assertThat(actual).isEqualTo(2L)
     }
 
     @Test
     fun getBookStatistics() {
-        val books = mutableListOf(
-                Book.fixtures("책1", BookType.SCIENCE),
-                Book.fixtures("책2", BookType.SCIENCE),
-                Book.fixtures("책3", BookType.MAGAZINE))
-        every { bookRepository.findAll() } returns books
+        val bookStatResponses = mutableListOf(
+            BookStatResponse(BookType.SCIENCE, 2),
+            BookStatResponse(BookType.MAGAZINE, 1))
+        every { bookRepository.getStats() } returns bookStatResponses
 
         val actual = bookService.getBookStatistics()
 
@@ -128,30 +123,29 @@ class BookServiceTest {
         val science = actual.first { response ->
             response.bookType == BookType.SCIENCE
         }
-        assertThat(science.count).isEqualTo(2)
+        assertThat(science.count).isEqualTo(2L)
 
         val magazine = actual.first { response ->
             response.bookType == BookType.MAGAZINE
         }
-        assertThat(magazine.count).isEqualTo(1)
+        assertThat(magazine.count).isEqualTo(1L)
     }
 
 
     @Test
     fun getBookStatistics_refactoring() {
-        val books = mutableListOf(
-            Book.fixtures("책1", BookType.SCIENCE),
-            Book.fixtures("책2", BookType.SCIENCE),
-            Book.fixtures("책3", BookType.MAGAZINE))
-        every { bookRepository.findAll() } returns books
+        val bookStatResponses = mutableListOf(
+            BookStatResponse(BookType.SCIENCE, 2),
+            BookStatResponse(BookType.MAGAZINE, 1))
+        every { bookRepository.getStats() } returns bookStatResponses
 
         val actual = bookService.getBookStatistics()
 
-        assertCount(actual, BookType.SCIENCE, 2)
-        assertCount(actual, BookType.MAGAZINE, 1)
+        assertCount(actual, BookType.SCIENCE, 2L)
+        assertCount(actual, BookType.MAGAZINE, 1L)
     }
 
-    private fun assertCount(actual: List<BookStatResponse>, type: BookType, expectedCount: Int){
+    private fun assertCount(actual: List<BookStatResponse>, type: BookType, expectedCount: Long){
         assertThat(actual.first{ response -> response.bookType == type }.count).isEqualTo(expectedCount)
     }
 }
