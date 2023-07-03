@@ -152,8 +152,6 @@ class BookServiceTest {
     }
 
     private fun assertCount(actual: List<BookStatResponse>, type: BookType, expectedCount: Int){
-        assertThat(actual.first{
-            response -> response.bookType == type
-        }.count).isEqualTo(expectedCount)
+        assertThat(actual.first{ response -> response.bookType == type }.count).isEqualTo(expectedCount)
     }
 }
