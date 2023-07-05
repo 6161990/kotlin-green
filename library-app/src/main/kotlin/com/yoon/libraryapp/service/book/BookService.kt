@@ -8,12 +8,14 @@ import com.yoon.libraryapp.domain.user.loanHistory.UserLoanStatus
 import com.yoon.libraryapp.dto.book.request.BookLoanRequest
 import com.yoon.libraryapp.dto.book.request.BookReturnRequest
 import com.yoon.libraryapp.dto.book.response.BookStatResponse
+import com.yoon.libraryapp.repository.book.BookQuerydslRepository
 import com.yoon.libraryapp.utils.fail
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 class  BookService(
+    private val bookQuerydslRepository: BookQuerydslRepository,
     private val bookRepository: BookRepository,
     private val userRepository: UserRepository,
     private val userLoanHistoryRepository: UserLoanHistoryRepository,
@@ -48,7 +50,7 @@ class  BookService(
 
     @Transactional(readOnly = true)
     fun getBookStatistics(): List<BookStatResponse> {
-        return bookRepository.getStats()
+        return bookQuerydslRepository .getStats()
     }
 
 
