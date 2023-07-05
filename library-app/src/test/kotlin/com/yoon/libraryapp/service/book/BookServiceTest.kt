@@ -12,6 +12,8 @@ import com.yoon.libraryapp.domain.user.loanHistory.UserLoanStatus.LOANED
 import com.yoon.libraryapp.dto.book.request.BookLoanRequest
 import com.yoon.libraryapp.dto.book.request.BookReturnRequest
 import com.yoon.libraryapp.dto.book.response.BookStatResponse
+import com.yoon.libraryapp.repository.book.BookQuerydslRepository
+import com.yoon.libraryapp.repository.user.UserLoanHistoryQuerydslRepository
 import io.mockk.every
 import io.mockk.verify
 import org.assertj.core.api.Assertions.*
@@ -28,10 +30,13 @@ class BookServiceTest {
     lateinit var bookRepository: BookRepository
 
     @MockkBean
+    lateinit var bookQuerydslRepository: BookQuerydslRepository
+
+    @MockkBean
     lateinit var userRepository: UserRepository
 
     @MockkBean
-    lateinit var userLoanHistoryRepository: UserLoanHistoryRepository
+    lateinit var userLoanHistoryQuerydslRepository: UserLoanHistoryQuerydslRepository
 
     private lateinit var bookService: BookService
 
@@ -39,7 +44,7 @@ class BookServiceTest {
 
     @BeforeEach
     fun setUp() {
-        bookService = BookService(bookRepository, userRepository, userLoanHistoryRepository)
+        bookService = BookService(bookQuerydslRepository, bookRepository, userRepository, userLoanHistoryQuerydslRepository)
     }
 
     @Test
@@ -68,14 +73,14 @@ class BookServiceTest {
         val user = User("k", 24)
         every { userRepository.findByName(user.name) } returns user
         every { bookRepository.findByName(book.name) } returns book
-        every { userLoanHistoryRepository.findByBookNameAndStatus(book.name, LOANED) } returns null
+        every { userLoanHistoryQuerydslRepository.find(book.name, LOANED) } returns null
 
         val request = BookLoanRequest(user.name, book.name)
         bookService.loanBook(request)
 
         verify { userRepository.findByName(user.name) }
         verify { bookRepository.findByName(book.name) }
-        verify { userLoanHistoryRepository.findByBookNameAndStatus(book.name, LOANED) }
+        verify { userLoanHistoryQuerydslRepository.find(book.name, LOANED) }
     }
 
     @Test
@@ -84,7 +89,7 @@ class BookServiceTest {
         val userLoanHistory = UserLoanHistory.fixture(user, book.name)
         every { userRepository.findByName(user.name) } returns user
         every { bookRepository.findByName(book.name) } returns book
-        every { userLoanHistoryRepository.findByBookNameAndStatus(book.name, LOANED) } returns userLoanHistory
+        every { userLoanHistoryQuerydslRepository.find(book.name, LOANED) } returns userLoanHistory
 
         val request = BookLoanRequest(user.name, book.name)
 
@@ -97,7 +102,7 @@ class BookServiceTest {
 
     @Test
     fun countLoanedBook() {
-        every { userLoanHistoryRepository.countByStatus(LOANED) } returns 2L
+        every { userLoanHistoryQuerydslRepository.count(LOANED) } returns 2L
 
         val actual = bookService.countLoanedBook()
 
@@ -109,7 +114,7 @@ class BookServiceTest {
         val bookStatResponses = mutableListOf(
             BookStatResponse(BookType.SCIENCE, 2),
             BookStatResponse(BookType.MAGAZINE, 1))
-        every { bookRepository.getStats() } returns bookStatResponses
+        every { bookQuerydslRepository.getStats() } returns bookStatResponses
 
         val actual = bookService.getBookStatistics()
 
@@ -137,7 +142,7 @@ class BookServiceTest {
         val bookStatResponses = mutableListOf(
             BookStatResponse(BookType.SCIENCE, 2),
             BookStatResponse(BookType.MAGAZINE, 1))
-        every { bookRepository.getStats() } returns bookStatResponses
+        every { bookQuerydslRepository.getStats() } returns bookStatResponses
 
         val actual = bookService.getBookStatistics()
 

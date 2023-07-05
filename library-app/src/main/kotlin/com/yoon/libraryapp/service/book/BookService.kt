@@ -9,6 +9,7 @@ import com.yoon.libraryapp.dto.book.request.BookLoanRequest
 import com.yoon.libraryapp.dto.book.request.BookReturnRequest
 import com.yoon.libraryapp.dto.book.response.BookStatResponse
 import com.yoon.libraryapp.repository.book.BookQuerydslRepository
+import com.yoon.libraryapp.repository.user.UserLoanHistoryQuerydslRepository
 import com.yoon.libraryapp.utils.fail
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -18,7 +19,7 @@ class  BookService(
     private val bookQuerydslRepository: BookQuerydslRepository,
     private val bookRepository: BookRepository,
     private val userRepository: UserRepository,
-    private val userLoanHistoryRepository: UserLoanHistoryRepository,
+    private val userLoanHistoryQuerydslRepository: UserLoanHistoryQuerydslRepository,
 ) {
 
     @Transactional
@@ -29,7 +30,7 @@ class  BookService(
     @Transactional
     fun loanBook(request: BookLoanRequest){
         val book = bookRepository.findByName(request.bookName) ?: fail()
-        if(userLoanHistoryRepository.findByBookNameAndStatus(request.bookName, UserLoanStatus.LOANED)!= null){
+        if(userLoanHistoryQuerydslRepository.find(request.bookName, UserLoanStatus.LOANED)!= null){
             throw IllegalArgumentException("진작 대출되어 있는 책입니다")
         }
 
@@ -45,7 +46,7 @@ class  BookService(
 
     @Transactional(readOnly = true)
     fun countLoanedBook(): Int {
-        return  userLoanHistoryRepository.countByStatus(UserLoanStatus.LOANED).toInt()
+        return  userLoanHistoryQuerydslRepository.count(UserLoanStatus.LOANED).toInt()
     }
 
     @Transactional(readOnly = true)
