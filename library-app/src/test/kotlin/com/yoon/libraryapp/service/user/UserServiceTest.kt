@@ -7,6 +7,7 @@ import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistoryRepository
 import com.yoon.libraryapp.domain.user.loanHistory.UserLoanStatus
 import com.yoon.libraryapp.dto.user.request.UserCreateRequest
 import com.yoon.libraryapp.dto.user.request.UserUpdateRequest
+import com.yoon.libraryapp.service.CleaningBootTest
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
@@ -19,11 +20,12 @@ class UserServiceTest @Autowired constructor(
     private val userService: UserService,
     private val userRepository: UserRepository,
     private val userLoanHistoryRepository: UserLoanHistoryRepository
-){
-    @AfterEach
+) :  CleaningBootTest() {
+
+    /*@AfterEach
     fun tearDown() {
         userRepository.deleteAll()
-    }
+    }*/
 
     @Test
     fun saveUser() {
