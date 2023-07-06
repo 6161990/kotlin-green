@@ -2,6 +2,8 @@ package com.yoon.libraryapp.service.user
 
 import com.yoon.libraryapp.domain.user.User
 import com.yoon.libraryapp.domain.user.UserRepository
+import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistory
+import com.yoon.libraryapp.domain.user.loanHistory.UserLoanHistoryRepository
 import com.yoon.libraryapp.dto.user.request.UserCreateRequest
 import com.yoon.libraryapp.dto.user.request.UserUpdateRequest
 import com.yoon.libraryapp.dto.user.response.UserLoanHistoryResponse
@@ -13,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class UserService(
-    private val userRepository: UserRepository,
+    private val userRepository: UserRepository, private val userLoanHistoryRepository: UserLoanHistoryRepository,
 ) {
 
     @Transactional
@@ -43,5 +45,14 @@ class UserService(
     @Transactional(readOnly = true)
     fun getUserLoanHistories(): List<UserLoanHistoryResponse> {
         return userRepository.findAllWithHistories().map(UserLoanHistoryResponse::of)
+    }
+
+    @Transactional
+    fun saveUserTwoBookLoan() {
+        val user = User("jul", 20)
+        userRepository.save(user)
+
+        userLoanHistoryRepository.save(UserLoanHistory(user, "book1"))
+        userLoanHistoryRepository.save(UserLoanHistory(user, "book2"))
     }
 }
