@@ -14,9 +14,16 @@ repositories {
 }
 
 dependencies {
+    project(":values")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+    // 코틀린에서 필수적으로 들어가는 의존성
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation(kotlin("stdlib-jdk8"))
+
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
-    implementation(kotlin("stdlib-jdk8"))
 }
 
 
