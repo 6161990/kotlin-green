@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    project(":values")
+    implementation(project(mapOf("path" to ":values")))
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
     // 코틀린에서 필수적으로 들어가는 의존성
