@@ -4,8 +4,8 @@ import java.util.*
 import java.util.regex.Pattern
 
 data class Amount(
-    private val value: Long,
-    private val currency: Currency,
+    val value: Long,
+    val currency: Currency,
 ){
 
     companion object {
