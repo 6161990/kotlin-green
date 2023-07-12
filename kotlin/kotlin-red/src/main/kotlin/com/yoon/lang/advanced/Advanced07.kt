@@ -46,7 +46,6 @@ class LateInit {
     }
 }
 
-
 fun main() {
 
     val helloBot = HelloBot()

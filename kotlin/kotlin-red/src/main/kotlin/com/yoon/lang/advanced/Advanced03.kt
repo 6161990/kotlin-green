@@ -10,6 +10,10 @@ object Singleton {
     val a = 1234
 
     val print = println(a)
+
+    fun ad(a: Int){
+
+    }
 }
 
 /** 상수 : const */
