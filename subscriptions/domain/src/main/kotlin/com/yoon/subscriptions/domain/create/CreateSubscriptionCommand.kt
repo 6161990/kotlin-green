@@ -13,7 +13,7 @@ data class CreateSubscriptionCommand (
     val product: SubscriptionProductItem,
     val billCredit: BillCredit,
     val interval: Interval,
-    val discountPolicies: List<NthDiscountPolicy>
+    val discountPolicies: MutableList<NthDiscountPolicy>
 ){
 
     companion object {
