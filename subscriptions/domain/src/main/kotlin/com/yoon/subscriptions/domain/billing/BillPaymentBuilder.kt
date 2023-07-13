@@ -2,8 +2,9 @@ package com.yoon.subscriptions.domain.billing
 
 class BillPaymentBuilder(
     private val method: PaymentMethod,
-    private var vendor: PaymentVendor?,
 ) {
+
+    private lateinit var vendor: PaymentVendor
 
     fun vendor(vendor: PaymentVendor): BillPaymentBuilder {
         this.vendor = vendor

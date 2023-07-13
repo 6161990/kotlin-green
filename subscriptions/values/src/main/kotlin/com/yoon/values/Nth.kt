@@ -10,7 +10,7 @@ data class Nth(
         val FIRST = nthOf(FIRST_VALUE)
         val INFINITY = nthOf(INFINITY_VALUE)
 
-        private fun nthOf(nth: Int): Nth {
+        fun nthOf(nth: Int): Nth {
             return Nth(nth)
         }
 

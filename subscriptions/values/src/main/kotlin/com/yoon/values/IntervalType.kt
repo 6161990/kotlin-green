@@ -6,7 +6,7 @@ enum class IntervalType{
 
     DAY, MONTH, YEAR;
 
-    fun next(localDateTime: LocalDateTime, intervalValue: Int): LocalDateTime? {
+    fun next(localDateTime: LocalDateTime, intervalValue: Int): LocalDateTime {
         if(this==DAY){
             return localDateTime.plusDays(intervalValue.toLong())
         }

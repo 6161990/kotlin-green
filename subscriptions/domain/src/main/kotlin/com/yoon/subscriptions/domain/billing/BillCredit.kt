@@ -10,11 +10,6 @@ class BillCredit(
             return BillPaymentBuilder(method)
         }
 
-        private fun BillPaymentBuilder(method: PaymentMethod): BillPaymentBuilder {
-            return BillPaymentBuilder(method)
-        }
-
-
         fun creditOf(method: PaymentMethod,
                      vendor: PaymentVendor?): BillCredit {
             return BillCredit(method, vendor)
