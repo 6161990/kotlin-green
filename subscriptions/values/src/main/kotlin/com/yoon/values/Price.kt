@@ -3,7 +3,7 @@ package com.yoon.values
 import java.util.*
 
 data class Price(
-    private val amount: Amount,
+    val amount: Amount,
 ){
 
     companion object {
