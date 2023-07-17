@@ -8,6 +8,7 @@ data class ReservedAt(
 )
 {
     companion object{
+        val NEED_TO_IMMEDIATELY_REQUEST : ReservedAt = reservedAtOf(LocalDateTime.of(1970, 1,1,0,0))
         val yyyyMMddHHmmss : DateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss")
         val yyyyMMdd : DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")
 
