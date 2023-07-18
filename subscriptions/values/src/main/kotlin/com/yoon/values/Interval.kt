@@ -6,7 +6,7 @@ import java.time.LocalDateTime
 class Interval(
     private val value: Int,
     private val type: IntervalType,
-    private val maxNth: Nth,
+    val maxNth: Nth,
 ) {
 
     companion object{

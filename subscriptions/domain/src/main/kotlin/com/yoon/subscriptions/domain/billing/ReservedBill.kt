@@ -27,7 +27,7 @@ interface ReservedBill : ReservedBillConfirmable {
                 .with(reservedAt)
         }
 
-        private fun billBuilder(nth: Nth): ReservedBillBuilder {
+        fun billBuilder(nth: Nth): ReservedBillBuilder {
             return Builder(nth)
         }
 
