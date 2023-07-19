@@ -3,6 +3,7 @@ package com.yoon.subscriptions.domain.billing
 import com.yoon.values.*
 import java.time.LocalDateTime
 import java.time.temporal.ChronoField
+import java.util.Objects
 
 class ReservedBillImpl(
     private var id: BillId,
@@ -17,13 +18,22 @@ class ReservedBillImpl(
 
 
     companion object {
-
-        fun fixedBillHour(next : LocalDateTime, fixedBillHour: Int){
-            return next.with(ChronoField.HOUR_OF_DAY, fixedBillHour).with(ChronoField.MINUTE_OF_HOUR, 0)
+        fun fixedBillHour(next : LocalDateTime, fixedBillHour: Int) : LocalDateTime{
+            return next.with(ChronoField.HOUR_OF_DAY, fixedBillHour.toLong()).with(ChronoField.MINUTE_OF_HOUR, 0)
         }
     }
 
-    fun next(subIdValue: Long, reservedAmount: ReservedAmount): ReservedBill {
+    override fun confirm(subId: Long, receipt: Receipt, nextReservedAmount: ReservedAmount): ConfirmedBill {
+        if(isEnd()){
+            return ConfirmedBill.confirmedOf(this.end(), receipt)
+        }
+
+        require(Objects.nonNull(receipt)){ ReceiptConfirmFailException("영수증이 null") }
+        require(nth == receipt.nth){ ReceiptConfirmFailException("회차가 일치하지않음") }
+        return ConfirmedBill.confirmedOf(next(subId, nextReservedAmount), receipt)
+    }
+
+    private fun next(subIdValue: Long, reservedAmount: ReservedAmount): ReservedBill {
         if(isEnd()) {
             return this
         }
@@ -33,27 +43,36 @@ class ReservedBillImpl(
         }
 
         return ReservedBill.billBuilder(getNextNth())
-            .with(BillId.)
+            .with(BillId.makeBillId(getNextNth(), subIdValue))
+            .with(reservedAmount)
+            .with(getNextReservedAt())
+            .with(this.credit)
+            .with(this.referenceDate)
+            .with(this.interval)
             .build()
     }
 
-    fun getLastNth(): Nth {
+    private fun getLastNth(): Nth {
         return interval.maxNth
     }
 
+    private fun getNextReservedAt() : ReservedAt {
+        if(isFirst()){
+            val next = interval.nextOf(this.referenceDate.localDateTime)
+            val fixedBillHour = 10
+            val fixed = fixedBillHour(next, fixedBillHour)
+            return ReservedAt.reservedAtOf(fixed)
+        }
+        return this.reservedAt.next(this.interval)
+    }
 
-    fun getNextNth(): Nth {
+    private fun getNextNth(): Nth {
         return nth.next()
     }
 
     override fun toImmutableObject(): ReservedBill {
         return ReservedBillImpl(id, nth, reservedAt, amount, credit, referenceDate, interval, isEnd)
     }
-
-    override fun confirm(subId: Long, receipt: Receipt, nextReservedAmount: ReservedAmount): ConfirmedBill {
-        TODO("Not yet implemented")
-    }
-
 
     override fun id(): BillId {
         return this.id
