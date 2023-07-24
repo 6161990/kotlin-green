@@ -4,6 +4,6 @@ interface Fragile {
 
     fun isFragile(): Boolean
 
-    fun getSituation(): BrokenSituation
+    fun getSituation(): BrokenSituation?
 
 }
