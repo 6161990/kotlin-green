@@ -1,0 +1,41 @@
+package com.yoon.subscriptions
+
+import com.yoon.subscriptions.domain.billing.ReservedBill
+import com.yoon.subscriptions.domain.core.Aggregate
+import com.yoon.subscriptions.domain.recovery.Fragile
+import com.yoon.subscriptions.domain.recovery.SubscriptionSnapshot
+import com.yoon.values.Nth
+
+// TODO
+interface SubscriptionState :
+    Fragile,
+    SubscriptionSnapshot,
+    Aggregate<SubscriptionId> {
+
+    override fun getId() : SubscriptionId
+
+    fun isNeedToImmediatelyRequest(): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    fun isDoneOfCurrentBill(): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    /**
+     * @return 아직 처리 되지 않은 예약 쳥구 :: immutable 하다.
+     * @see ReservedBill.toImmutableObject
+     */
+    fun getReservedBill(): ReservedBill?
+
+    /**
+     *
+     * @return 예약된 청구의 회차
+     */
+    fun getReservedBillNth(): Nth {
+        // TODO 여기 버그가 숨어 있는지 확인이 필요 ReservedBill 이 널이 되는 경우가 있는가?
+        return this.getReservedBill()!!.nth()
+    }
+
+
+}
