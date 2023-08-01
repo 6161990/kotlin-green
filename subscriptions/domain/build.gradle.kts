@@ -1,8 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("java")
-    kotlin("jvm") version "1.9.0"
+    `java-library`
+    kotlin("jvm")
+    id("java-test-fixtures")
 }
 
 group = "com.yoon"
@@ -15,7 +16,6 @@ repositories {
 
 dependencies {
     implementation(project(mapOf("path" to ":values")))
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
     // 코틀린에서 필수적으로 들어가는 의존성
     implementation("org.jetbrains.kotlin:kotlin-reflect")
