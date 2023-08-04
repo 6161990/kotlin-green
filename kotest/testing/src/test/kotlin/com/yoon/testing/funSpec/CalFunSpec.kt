@@ -1,4 +1,4 @@
-package com.yoon.testing.FunSpec
+package com.yoon.testing.funSpec
 
 import com.yoon.testing.Calculator
 import io.kotest.core.spec.style.FunSpec
