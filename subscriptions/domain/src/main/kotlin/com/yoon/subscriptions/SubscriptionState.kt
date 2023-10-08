@@ -2,9 +2,12 @@ package com.yoon.subscriptions
 
 import com.yoon.subscriptions.domain.billing.ReservedBill
 import com.yoon.subscriptions.domain.core.Aggregate
+import com.yoon.subscriptions.domain.order.OrderId
 import com.yoon.subscriptions.domain.recovery.Fragile
 import com.yoon.subscriptions.domain.recovery.SubscriptionSnapshot
+import com.yoon.values.ExpiredAt
 import com.yoon.values.Nth
+import com.yoon.values.Status
 
 // TODO
 interface SubscriptionState :
@@ -13,6 +16,17 @@ interface SubscriptionState :
     Aggregate<SubscriptionId> {
 
     override fun getId() : SubscriptionId
+
+    fun getOrderId() : OrderId
+
+    fun getExpiredAt() : ExpiredAt
+
+    fun isSubscribed() : Boolean {
+        return Status.of("SUBSCRIBED") == getStatus() ||
+                Status.of("RESERVE_UNSUBSCRIBED") == getStatus()
+    }
+
+    fun getStatus(): Status
 
     fun isNeedToImmediatelyRequest(): Boolean {
         TODO("Not yet implemented")

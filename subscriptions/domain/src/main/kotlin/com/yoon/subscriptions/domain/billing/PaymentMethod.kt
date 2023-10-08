@@ -5,8 +5,8 @@ class PaymentMethod(
 ) {
 
     companion object{
-        private val CARD = of("CARD")
-        private val NOPE = of("NOPE")
+        val CARD = of("CARD")
+        val NOPE = of("NOPE")
 
         fun of(name: String): PaymentMethod {
             return PaymentMethod(name)

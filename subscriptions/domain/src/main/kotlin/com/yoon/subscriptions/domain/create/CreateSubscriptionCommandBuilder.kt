@@ -5,13 +5,17 @@ import com.yoon.subscriptions.dependencies.product.SubscriptionProductItem
 import com.yoon.subscriptions.dependencies.user.UserId
 import com.yoon.subscriptions.domain.billing.BillCredit
 import com.yoon.subscriptions.domain.discount.NthDiscountPolicy
+import com.yoon.subscriptions.domain.order.OrderId
+import com.yoon.values.ExpiredAt
 import com.yoon.values.Interval
 import java.util.Objects
 
-class CreateSubscriptionCommandBuilder(){
+class CreateSubscriptionCommandBuilder{
 
     private lateinit var subscriptionId: SubscriptionId
     private lateinit var userId: UserId
+    private lateinit var orderId: OrderId
+    private lateinit var expiredAt: ExpiredAt
     private lateinit var productItem: SubscriptionProductItem
     private lateinit var billCredit: BillCredit
     private lateinit var interval: Interval
@@ -27,6 +31,17 @@ class CreateSubscriptionCommandBuilder(){
         this.userId = userId
         return this
     }
+
+    fun orderId(orderId: OrderId): CreateSubscriptionCommandBuilder {
+        this.orderId = orderId
+        return this
+    }
+
+    fun expiredAt(expiredAt: ExpiredAt): CreateSubscriptionCommandBuilder {
+        this.expiredAt = expiredAt
+        return this
+    }
+
 
     fun item(productItem: SubscriptionProductItem): CreateSubscriptionCommandBuilder {
         this.productItem = productItem
@@ -57,7 +72,7 @@ class CreateSubscriptionCommandBuilder(){
         require(Objects.nonNull(nthDiscountPolicies)) { "nthDiscountPolicies is required." }
 
         return CreateSubscriptionCommand(
-            subscriptionId, userId, productItem, billCredit, interval, nthDiscountPolicies
+            subscriptionId, userId, productItem, billCredit, interval, nthDiscountPolicies, orderId, expiredAt
         )
     }
 

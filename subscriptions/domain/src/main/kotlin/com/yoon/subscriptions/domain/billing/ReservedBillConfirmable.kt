@@ -9,7 +9,7 @@ interface ReservedBillConfirmable {
      * @param receipt 청구 영수증
      * @param nextReservedAmount 다음 회차 청구 금액
      * @return confirm 된 결과를 새로운 예약청구와 함께 전달한다.
-     * @throws ReceiptConfirmFailException1
+     * @throws ReceiptConfirmFailException
      * 청구 영수증을 confirm 하지 못했을 때 던짐
      */
     fun confirm(subId: Long, receipt: Receipt, nextReservedAmount: ReservedAmount): ConfirmedBill

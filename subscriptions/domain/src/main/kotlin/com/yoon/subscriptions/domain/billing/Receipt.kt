@@ -15,7 +15,7 @@ class Receipt(
 
     companion object Builder : ReceiptBuilder{
 
-        lateinit var nth : Nth
+        private lateinit var nth : Nth
         lateinit var paidAt : PaidAt
         lateinit var paidId : PaidId
         lateinit var paidAmount: PaidAmount

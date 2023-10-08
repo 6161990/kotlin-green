@@ -43,7 +43,6 @@ pluginManagement {
                     val ktlintVersion: String by settings
                     useVersion(ktlintVersion)
                 }
-
             }
         }
     }

@@ -8,13 +8,11 @@ import com.yoon.subscriptions.domain.billing.BillCredit
 import com.yoon.subscriptions.domain.billing.ConfirmedBill
 import com.yoon.subscriptions.domain.billing.ReservedBill
 import com.yoon.subscriptions.domain.discount.NthDiscountPolicy
+import com.yoon.subscriptions.domain.order.OrderId
 import com.yoon.subscriptions.domain.recovery.BrokenSituation
 import com.yoon.subscriptions.domain.subscribe.Subscribable
 import com.yoon.subscriptions.domain.unsubscribe.ReservedUnsubscription
-import com.yoon.values.Interval
-import com.yoon.values.Nth
-import com.yoon.values.RequestedAt
-import com.yoon.values.Status
+import com.yoon.values.*
 
 class Subscription(
     private var id: SubscriptionId,
@@ -22,7 +20,9 @@ class Subscription(
     private var productItem: SubscriptionProductItem,
     private var billCredit: BillCredit,
     private var interval: Interval,
-    private var discountPolicies: MutableList<NthDiscountPolicy>
+    private var discountPolicies: MutableList<NthDiscountPolicy>,
+    private var orderId: OrderId? = null,
+    private var expiredAt: ExpiredAt? = null,
 ) : Subscribable,
     SubscriptionState {
 
@@ -47,6 +47,7 @@ class Subscription(
     private var version: Long = 0
 
     // only create
+    @Deprecated("기간권 구독 탄생으로 인한 deprecated")
     fun Subscription(
         id: SubscriptionId,
         userId: UserId,
@@ -72,6 +73,36 @@ class Subscription(
         require(this.getReservedBillNth() == Nth.first()) { "첫 청구가 예약될 것이다." }
     }
 
+    // only create
+    fun Subscription(
+        id: SubscriptionId,
+        userId: UserId,
+        orderId: OrderId,
+        productItem: SubscriptionProductItem,
+        billCredit: BillCredit,
+        interval: Interval,
+        expiredAt: ExpiredAt,
+        discountPolicies: MutableList<NthDiscountPolicy>
+    ) {
+        setStatus(INIT_STATUS)
+        this.id = id
+        this.userId = userId
+        this.orderId = orderId
+        this.productItem = productItem
+        this.billCredit = billCredit
+        this.interval = interval
+        this.bills = mutableListOf()
+        this.expiredAt = expiredAt
+        this.requestedAt = RequestedAt.now()
+        this.discountPolicies = discountPolicies
+        this.reserveFirstBill()
+
+        require(INIT_STATUS == this.status) { "구독이 요청되었다. 결제를 하기 전까지는 REQUESTED" }
+        require(this.isNeedToImmediatelyRequest()) { "첫 구독은 즉시 청구를 진행해야한다." }
+        require(!this.isDoneOfCurrentBill()) { "아직 첫 청구가 진행 되지 않았다." }
+        require(this.getReservedBillNth() == Nth.first()) { "첫 청구가 예약될 것이다." }
+    }
+
     override fun subscribe() {
         TODO("Not yet implemented")
     }
@@ -86,6 +117,18 @@ class Subscription(
 
     override fun getId(): SubscriptionId {
         return this.id
+    }
+
+    override fun getOrderId(): OrderId {
+        TODO("Not yet implemented")
+    }
+
+    override fun getExpiredAt(): ExpiredAt {
+        TODO("Not yet implemented")
+    }
+
+    override fun getStatus(): Status {
+        TODO("Not yet implemented")
     }
 
     override fun getReservedBill(): ReservedBill? {
